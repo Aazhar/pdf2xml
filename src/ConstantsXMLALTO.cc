@@ -1,35 +1,76 @@
 //========================================================================
 //
-// ConstantsXML.cc
+// ConstantsXMLALTO.h
 //
-// Contain all constants for tag XML, attributs XML and other informations 
+// Contain all constants for tag XML, attributs XML and other informations
 // which are defined in the output file of pdftoxml.
 //
-// author: Sophie Andrieu
-// 04-2006
-// revision (11/2007): Emmanuel Giguet (handling double for image location)
-// Xerox Research Centre Europe
+// author: Achraf Azhar
+// 12-2017
 //
 //========================================================================
 
-#include "ConstantsXML.h"
+#include "ConstantsXMLALTO.h"
 
-namespace ConstantsXML
+namespace ConstantsXMLALTO
 {
-	// All tags XML
-	const char *TAG_DOCUMENT = "DOCUMENT";
+	// All tags ALTO XML dialect
+	const char *TAG_ALTO = "alto";
+
+	const char *ALTO_URI = "http://www.loc.gov/standards/alto/ns-v3#";
+
+	const char *XLINK_PREFIX = "xlink";
+
+	const char *XLINK_URI = "http://www.w3.org/1999/xlink";
+
+	const char *XSI_PREFIX = "xsi";
+
+	const char *XSI_URI = "http://www.w3.org/2001/XMLSchema-instance";
+
+    const char *SCHEMA_LOCATION_ATTR_NAME = "schemaLocation";
+
+    const char *SCHEMA_LOCATION_URI = "http://www.loc.gov/standards/alto/alto-v2.0.xsd";
+
+	const char *TAG_DESCRIPTION = "Description";
+    const char *TAG_MEASUREMENTUNIT = "MeasurementUnit";
+    const char *TAG_SOURCE_IMAGE_INFO = "sourceImageInformation";
+    const char *TAG_PDFFILENAME = "fileName";
+
+    const char *TAG_OCRPROCESSING = "OCRProcessing";
+    const char *ATTR_NAMEID_OCRPROCESSING = "ID";
+    const char *ATTR_VALUEID_OCRPROCESSING = "IdOcr";
+
+    const char *TAG_OCRPROCESSINGSTEP = "ocrProcessingStep";
+    const char *TAG_PROCESSINGDATE = "processingDateTime";
+    const char *TAG_PROCESSINGSOFTWARE = "processingSoftware";
+    const char *TAG_SOFTWARE_CREATOR = "softwareCreator";
+    const char *TAG_SOFTWARE_NAME = "softwareName";
+    const char *TAG_SOFTWARE_VERSION = "softwareVersion";
+
+
+	const char *TAG_STYLES = "Styles";
+	const char *TAG_LAYOUT = "Layout";
+
+
+
+
 	const char *TAG_METADATA = "METADATA";
-	const char *TAG_PDFFILENAME = "PDFFILENAME";
+	const char *TAG_PDFFILE_METADATA = "PDF_METADATA";
 	const char *TAG_PROCESS = "PROCESS";
 	const char *TAG_CREATIONDATE = "CREATIONDATE";
-	const char *TAG_VERSION = "VERSION";
 	const char *TAG_COMMENT = "COMMENT";
-	const char *TAG_PAGE = "PAGE";
+
+
+	const char *TAG_PAGE = "Page";
 	const char *TAG_IMAGE = "IMAGE";
 	const char *TAG_VECTORIALIMAGES = "VECTORIALIMAGES";
-	const char *TAG_BLOCK = "BLOCK";
-	const char *TAG_TEXT = "TEXT";
-	const char *TAG_TOKEN = "TOKEN";
+	const char *TAG_BLOCK = "TextBlock";
+	const char *TAG_TEXT = "TextLine";
+
+    const char *TAG_PRINTSPACE = "PrintSpace";
+
+	const char *TAG_TOKEN = "String";
+    const char *ATTR_TOKEN_CONTENT = "CONTENT";
 	const char *TAG_VECTORIALINSTRUCTIONS = "VECTORIALINSTRUCTIONS";
 	const char *TAG_GROUP = "GROUP";
 	const char *TAG_CLIP = "CLIP";
@@ -62,12 +103,12 @@ namespace ConstantsXML
 	
 	// All attributs
 	const char *ATTR_FORMAT = "format";
-	const char *ATTR_WIDTH = "width";
-	const char *ATTR_HEIGHT = "height";
-	const char *ATTR_NUMBER = "number";
+	const char *ATTR_WIDTH = "WIDTH";
+	const char *ATTR_HEIGHT = "HEIGHT";
+	const char *ATTR_PHYSICAL_IMG_NR = "PHYSICAL_IMG_NR";
 	const char *ATTR_HREF = "href";
-	const char *ATTR_X = "x";
-	const char *ATTR_Y = "y";
+	const char *ATTR_X = "HPOS";
+	const char *ATTR_Y = "VPOS";
 	
 	const char *ATTR_ROTATION = "rotation";
 	const char *ATTR_ANGLE = "angle";
@@ -104,7 +145,7 @@ namespace ConstantsXML
 	const char *ATTR_INLINE = "inline";
 	const char *ATTR_MASK = "mask";
 	
-	const char *ATTR_ID = "id";
+	const char *ATTR_ID = "ID";
 	const char *ATTR_ID_ITEM_PARENT = "idItemParent";
 	const char *ATTR_NB_PAGES = "nbPages";
 	

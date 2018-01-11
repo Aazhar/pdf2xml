@@ -21,8 +21,8 @@
 #include <libxml/xmlmemory.h>
 #include <libxml/parser.h>
 
-#include "ConstantsXML.h"
-using namespace ConstantsXML;
+#include "ConstantsXMLAlto.h"
+using namespace ConstantsXMLALTO;
 
 class Parameters;
 

@@ -51,8 +51,12 @@ namespace ConstantsUtils
 	const char *NAME_OUTLINE = "outline";
 	const char *NAME_ANNOT = "annot";
 	const char *NAME_DATA_DIR = "_data";
-	
-	const char *PDFTOXML_VERSION = "2.1";
-	const char *PDFTOXML_NAME = "pdftoxml";
+
+	const char *PDFALTO_VERSION = "2.1";
+	const char *PDFALTO_NAME = "pdfalto";
+
+	const char *PDFALTO_CREATOR = "INRIA_ALMANACH";
+
+	const char *MEASUREMENT_UNIT = "pixel";
 
 }

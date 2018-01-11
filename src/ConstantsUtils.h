@@ -33,9 +33,13 @@ namespace ConstantsUtils
 	extern const char *NAME_OUTLINE;
 	extern const char *NAME_ANNOT;
 	extern const char *NAME_DATA_DIR;
-	
-	extern const char *PDFTOXML_VERSION;
-	extern const char *PDFTOXML_NAME;
+
+	extern const char *PDFALTO_VERSION;
+	extern const char *PDFALTO_NAME;
+
+	extern const char *PDFALTO_CREATOR;
+
+	extern const char *MEASUREMENT_UNIT;
 
 }
 

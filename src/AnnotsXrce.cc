@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "Object.h"
 #include "Link.h"
-#include "ConstantsXML.h"
+#include "ConstantsXMLALTO.h"
 #include "Catalog.h"
 #include "UnicodeMap.h"
 #include "PDFDocEncoding.h"
@@ -22,7 +22,7 @@
 #include "UnicodeTypeTable.h"
 
 
-using namespace ConstantsXML;
+using namespace ConstantsXMLALTO;
 
 #include <libxml/xmlmemory.h>
 #include <libxml/parser.h>

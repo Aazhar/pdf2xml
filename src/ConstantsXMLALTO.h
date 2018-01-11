@@ -1,44 +1,74 @@
 //========================================================================
 //
-// ConstantsXML.h
+// ConstantsXMLALTO.h
 //
 // Contain all constants for tag XML, attributs XML and other informations 
 // which are defined in the output file of pdftoxml.
 //
-// author: Sophie Andrieu
-// 04-2006
-// revision (11/2007): Emmanuel Giguet (handling double for image location)
-// Xerox Research Centre Europe
+// author: Achraf Azhar
+// 12-2017
 //
 //========================================================================
 
-#ifndef CONSTANTSXML_H_
-#define CONSTANTSXML_H_
+#ifndef CONSTANTSXMLALTO_H_
+#define CONSTANTSXMLALTO_H_
 
 /** 
- * ConstantsXML namespace : contain all constants XML (tag, attributes XML) which are used into pdftoxml tool <br></br>
- * Xerox Research Centre Europe <br></br>
- * date : 04-2006 <br></br>
- * @author Sophie Andrieu
+ * ConstantsXMLALTO namespace : contain all constants XML ALTO (tag, attributes ALTO) which are used into pdfalto tool <br></br>
+ * date : 12-2017 <br></br>
+ * @author Achraf Azhar
  * @version xpdf 3.01
  */
 
-namespace ConstantsXML
+namespace ConstantsXMLALTO
 {
 	// All tags XML
-	extern const char *TAG_DOCUMENT;
+	extern const char *TAG_ALTO;
+	extern const char *ALTO_URI;
+	extern const char *XLINK_PREFIX;
+	extern const char *XLINK_URI;
+	extern const char *XSI_PREFIX;
+	extern const char *XSI_URI;
+    extern const char *SCHEMA_LOCATION_ATTR_NAME;
+    extern const char *SCHEMA_LOCATION_URI;
+
+	extern const char *TAG_DESCRIPTION;
+    extern const char *TAG_MEASUREMENTUNIT;
+    extern const char *TAG_SOURCE_IMAGE_INFO;
+    extern const char *TAG_OCRPROCESSING;
+
+    extern const char *ATTR_NAMEID_OCRPROCESSING;
+    extern const char *ATTR_VALUEID_OCRPROCESSING;
+
+    extern const char *TAG_OCRPROCESSINGSTEP;
+    extern const char *TAG_PROCESSINGDATE;
+    extern const char *TAG_PROCESSINGSOFTWARE;
+
+    extern const char *TAG_SOFTWARE_CREATOR;
+    extern const char *TAG_SOFTWARE_NAME;
+    extern const char *TAG_SOFTWARE_VERSION;
+
+	extern const char *TAG_STYLES;
+	extern const char *TAG_LAYOUT;
+
 	extern const char *TAG_METADATA;
+	extern const char *TAG_PDFFILE_METADATA;
 	extern const char *TAG_PDFFILENAME;
 	extern const char *TAG_PROCESS;
 	extern const char *TAG_CREATIONDATE;
-	extern const char *TAG_VERSION;
+
 	extern const char *TAG_COMMENT;
 	extern const char *TAG_PAGE;
 	extern const char *TAG_IMAGE;
 	extern const char *TAG_VECTORIALIMAGES;
 	extern const char *TAG_BLOCK;
 	extern const char *TAG_TEXT;
+
+	extern const char *TAG_PRINTSPACE;
+
 	extern const char *TAG_TOKEN;
+    extern const char *ATTR_TOKEN_CONTENT;
+
 	extern const char *TAG_VECTORIALINSTRUCTIONS;
 	extern const char *TAG_GROUP;
 	extern const char *TAG_CLIP;
@@ -72,7 +102,7 @@ namespace ConstantsXML
 	extern const char *ATTR_FORMAT;
 	extern const char *ATTR_WIDTH;
 	extern const char *ATTR_HEIGHT;
-	extern const char *ATTR_NUMBER;
+	extern const char *ATTR_PHYSICAL_IMG_NR;
 	extern const char *ATTR_HREF;
 	extern const char *ATTR_X;
 	extern const char *ATTR_Y;
