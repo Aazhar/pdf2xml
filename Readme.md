@@ -131,6 +131,27 @@ drwxr-xr-x 1 lfoppiano 197121 0 lug 28 09:06 xpdf-3.04/
 
 > make.bat
 
+### MacOS
+
+* Download the source with [Xpdf](https://github.com/kermitt2/xpdf) shipped as submodule using git:
+
+> git clone --recursive https://github.com/Aazhar/pdfalto.git
+
+* In order to compile Xpdf, we’ll need to have libxml, freestyle, X11 (xquartz on mac) openmotif installed (using home-brew for instance) and added to the environment (accessible from terminal)
+
+* Compile xpdf (see the file INSTALL in their source directory), then create `libxpdf.a` in `xpdf/xpdf/` with 
+
+> ar -rc libxpdf.a *.o
+
+* Compile the first zlib then png libraries (dependent), under subdirectory `/images`:
+
+> cmake CMakeList.txt
+
+> make -f Makefile 
+
+* Execute the compilation to generate pdfalto using :
+
+> make -f Makefile.macos 
 
 ## Contributor
 

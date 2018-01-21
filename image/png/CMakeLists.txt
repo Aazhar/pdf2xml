@@ -27,5 +27,8 @@ set(PNG_SOURCE_FILES
 
 add_library(${PROJECT_NAME} SHARED ${PNG_SOURCE_FILES})
 
+#dependency
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/../zlib/libzlib.dylib)
+
 include(GenerateExportHeader)
 generate_export_header(${PROJECT_NAME})
