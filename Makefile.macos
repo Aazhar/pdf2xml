@@ -44,7 +44,7 @@ compile.src:
 	$(CXX) $(CXXFLAGS) $(CXXFLAGSGOO) $(CXXFLAGSFOFI) -I$(DIRXPDF) -Ilibxml2  -o $(DIRSRC)/Parameters.o -c $(DIRSRC)/Parameters.cc
 	$(CXX) $(CXXFLAGS) $(CXXFLAGSGOO) $(CXXFLAGSFOFI) -I$(DIRXPDF) -I/usr/include/libxml2   -o $(DIRSRC)/AnnotsXrce.o -c $(DIRSRC)/AnnotsXrce.cc
 	$(CXX) $(CXXFLAGS) $(CXXFLAGSGOO) $(CXXFLAGSFOFI) -I$(DIRXPDF)  -I/usr/include/libxml2     -o $(DIRSRC)/PDFDocXrce.o -c $(DIRSRC)/PDFDocXrce.cc
-	$(CXX) $(CXXFLAGS) $(CXXFLAGSGOO) $(CXXFLAGSFOFI) -I$(DIRXPDF)  -I/usr/include/libxml2 -o $(DIRSRC)/XmlAltoOutputDev.o -c $(DIRSRC)/XmlAltoOutputDev.cc
+	$(CXX) $(CXXFLAGS) $(CXXFLAGSGOO) $(CXXFLAGSFOFI) -I$(DIRXPDF) -I$(DIRPNG) -I/usr/include/libxml2 -o $(DIRSRC)/XmlAltoOutputDev.o -c $(DIRSRC)/XmlAltoOutputDev.cc
 	$(CXX) $(CXXFLAGS) $(CXXFLAGSGOO) $(CXXFLAGSFOFI) -I$(DIRSRC) -I$(DIRXPDF) -I$(DIRPNG) -I$(DIRZLIB) -I/usr/include/libxml2  -o $(DIRSRC)/pdfalto.o -c $(DIRSRC)/pdfalto.cc
 	$(LIBPROG) -rc $(DIRSRC)/libsrc.a $(DIRSRC)/*.o
 
@@ -52,7 +52,7 @@ compile.src:
 
 # Target to create the executable for pdfalto (locate in exe directory)
 pdfaltoEXE: compile.src
-	$(CXX) $(CXXFLAGS) $(CXXFLAGSGOO) $(CXXFLAGSFOFI) -I$(DIRXPDF) -I$(DIRSRC) -I$(DIRPNG) -I$(DIRZLIB) -I/usr/include/libxml2 -o $(DIREXE)/$(PDFTOXMLEXE) $(DIRSRC)/pdfalto.cc $(DIRSRC)/libsrc.a $(DIRXPDF)/libxpdf.a $(DIRGOO)/libGoo.a $(DIRFOFI)/libfofi.a $(DIRPNG)/libpng.dylib -lm -lxml2 
+	$(CXX) $(CXXFLAGS) $(CXXFLAGSGOO) $(CXXFLAGSFOFI) -I$(DIRXPDF) -I$(DIRSRC) -I$(DIRPNG) -I$(DIRZLIB) -I/usr/include/libxml2 -o $(DIREXE)/$(PDFALTOEXE) $(DIRSRC)/pdfalto.cc $(DIRSRC)/libsrc.a $(DIRXPDF)/libxpdf.a $(DIRGOO)/libGoo.a $(DIRFOFI)/libfofi.a $(DIRPNG)/libpng.dylib -lm -lxml2 
 #on mac works also with .a
 
 
