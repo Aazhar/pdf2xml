@@ -152,9 +152,9 @@ TextFontStyleInfo::~TextFontStyleInfo() {
     if (fontName) {
         delete fontName;
     }
-    if (fontSize) {
-        delete fontSize;
-    }
+//    if (fontSize) {
+//        delete fontSize;
+//    }
     if (fontColor) {
         delete fontColor;
     }
@@ -170,11 +170,11 @@ TextFontStyleInfo::~TextFontStyleInfo() {
 }
 
 inline bool operator==(const TextFontStyleInfo& lhs, const TextFontStyleInfo& rhs){
-    return ((lhs->getFontName()->cmp(rhs->getFontName())) &&  (lhs.getFontSize() == rhs.getFontSize())
-            && (lhs.getFontColor()->cmp(rhs->getFontColor()))
-            && (lhs.getFontType()->cmp(rhs->getFontType()))
-            && (lhs.getFontStyle()->cmp(rhs->getFontStyle()))
-            && (lhs.getFontWidth()->cmp(rhs->getFontWidth())));
+    return (((lhs.getFontName())->cmp(rhs.getFontName())) &&  (lhs.getFontSize() == rhs.getFontSize())
+            && (lhs.getFontColor()->cmp(rhs.getFontColor()))
+            && (lhs.getFontType()->cmp(rhs.getFontType()))
+            && (lhs.getFontStyle()->cmp(rhs.getFontStyle()))
+            && (lhs.getFontWidth()->cmp(rhs.getFontWidth())));
 }
 
 

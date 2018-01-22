@@ -111,16 +111,16 @@ private:
 class TextFontStyleInfo {
 public:
 
-    TextFontStyleInfo(GString *fontName, double fontSize);
+    TextFontStyleInfo(GString *fontName, double fontSize, GString *fontColor, GString *fontType, GString *fontStyle, GString *fontWidth);
     ~TextFontStyleInfo();
 
     // Get the font name (which may be NULL).
-    GString *getFontName() { return fontName; }
-    double getFontSize() { return fontSize; }
-    GString *getFontColor() { return fontColor; }
-    GString *getFontType() { return fontType; }
-    GString *getFontStyle() { return fontStyle; }
-    GString *getFontWidth() { return fontWidth; }
+    GString* getFontName() const { return fontName; }
+    double getFontSize() const { return fontSize; }
+    GString* getFontColor() const { return fontColor; }
+    GString* getFontType() const { return fontType; }
+    GString* getFontStyle() const { return fontStyle; }
+    GString* getFontWidth() const { return fontWidth; }
 
     // Compare two strings:  -1:<  0:=  +1:>
     int cmp(TextFontStyleInfo *tsi);
@@ -128,12 +128,12 @@ public:
 
 private:
 
-    GString *fontName;
+    GString* fontName;
     double fontSize;
-    GString *fontColor;
-    GString *fontType;
-    GString *fontStyle;
-    GString *fontWidth;
+    GString* fontColor;
+    GString* fontType;
+    GString* fontStyle;
+    GString* fontWidth;
 //#endif
 
     friend class TextFontInfo;
