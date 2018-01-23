@@ -139,14 +139,6 @@ GBool TextFontInfo::matches(GfxState *state) {
     return state->getFont() == gfxFont;
 }
 
-TextFontStyleInfo::TextFontStyleInfo(GString *fontName, double fontSize, GString *fontColor, GString *fontType, GString *fontStyle, GString *fontWidth) {
-    fontName = fontName;
-    fontSize = fontSize;
-    fontColor = fontColor;
-    fontType = fontType;
-    fontStyle = fontStyle;
-    fontWidth = fontWidth;
-}
 
 TextFontStyleInfo::~TextFontStyleInfo() {
     if (fontName) {
@@ -158,24 +150,14 @@ TextFontStyleInfo::~TextFontStyleInfo() {
     if (fontColor) {
         delete fontColor;
     }
-    if (fontType) {
-        delete fontType;
-    }
-    if (fontStyle) {
-        delete fontStyle;
-    }
-    if (fontWidth) {
-        delete fontWidth;
-    }
 }
 
-inline bool operator==(const TextFontStyleInfo& lhs, const TextFontStyleInfo& rhs){
-    return (((lhs.getFontName())->cmp(rhs.getFontName())) &&  (lhs.getFontSize() == rhs.getFontSize())
-            && (lhs.getFontColor()->cmp(rhs.getFontColor()))
-            && (lhs.getFontType()->cmp(rhs.getFontType()))
-            && (lhs.getFontStyle()->cmp(rhs.getFontStyle()))
-            && (lhs.getFontWidth()->cmp(rhs.getFontWidth())));
-}
+//inline bool operator==(const TextFontStyleInfo& lhs, const TextFontStyleInfo& rhs){
+//    return (((lhs.getFontName())->cmp(rhs.getFontName())  == 0 ) &&  (lhs.getFontSize() == rhs.getFontSize())
+//            && (lhs.getFontColor()->cmp(rhs.getFontColor())  == 0 )
+//            && (lhs.getFontType() == rhs.getFontType())
+//            && (lhs.getFontStyle() == rhs.getFontStyle()));
+//}
 
 
 //------------------------------------------------------------------------
@@ -1413,7 +1395,7 @@ void TextPage::addAttributsNodeVerbose(xmlNodePtr node, char* tmp,
 
 void TextPage::addAttributsNode(xmlNodePtr node, TextWord *word, double &xMaxi,
                                 double &yMaxi, double &yMinRot, double &yMaxRot, double &xMinRot,
-                                double &xMaxRot) {
+                                double &xMaxRot, TextFontStyleInfo *fontStyleInfo) {
 
     char *tmp;
     tmp=(char*)malloc(10*sizeof(char));
@@ -1424,10 +1406,12 @@ void TextPage::addAttributsNode(xmlNodePtr node, TextWord *word, double &xMaxi,
         }
         if (word->font->isSerif()) {
             xmlNewProp(node, (const xmlChar*)ATTR_SERIF, (const xmlChar*)YES);
+            fontStyleInfo->setFontType(word->font->isSerif());
         }
         if (word->font->isFixedWidth()) {
             xmlNewProp(node, (const xmlChar*)ATTR_FIXED_WIDTH,
                        (const xmlChar*)YES);
+            fontStyleInfo->setFontStyle(word->font->isFixedWidth());
         }
     }
 
@@ -1443,9 +1427,12 @@ void TextPage::addAttributsNode(xmlNodePtr node, TextWord *word, double &xMaxi,
 
     sprintf(tmp, "%g", word->fontSize);
     xmlNewProp(node, (const xmlChar*)ATTR_FONT_SIZE, (const xmlChar*)tmp);
+    fontStyleInfo->setFontSize(word->fontSize);
+
 
     xmlNewProp(node, (const xmlChar*)ATTR_FONT_COLOR,
                (const xmlChar*)word->colortoString()->getCString());
+    fontStyleInfo->setFontColor(word->colortoString());
 
     sprintf(tmp, "%d", word->rot);
     xmlNewProp(node, (const xmlChar*)ATTR_ROTATION, (const xmlChar*)tmp);
@@ -1485,6 +1472,25 @@ void TextPage::addAttributsNode(xmlNodePtr node, TextWord *word, double &xMaxi,
     if (word->yMax > yMaxRot) {
         yMaxRot = word->yMax;
     }
+
+    GBool contains = gFalse;
+
+    for(int x = 0; x < fontStyles.size(); x++) {
+        if( fontStyleInfo->cmp(fontStyles[x]) ) {
+            contains = gTrue;
+            break;
+        }
+    }
+
+    if(!contains) {
+        fontStyleInfo->setId(fontStyles.size());
+        sprintf(tmp, "font%d", fontStyleInfo->getId());
+        //xmlNewProp(node, (const xmlChar*)ATTR_STYLEREFS, (const xmlChar*)tmp);
+        fontStyles.push_back(fontStyleInfo);
+    }
+
+//        cout << "size :"
+//             << fontStyles.size()  << std::endl;
 
     free(tmp);
 }
@@ -1670,10 +1676,23 @@ GBool TextPage::testAnnotatedText(double xMin,double yMin,double xMax,double yMa
     return gFalse;
 }
 
+GBool TextFontStyleInfo::cmp(TextFontStyleInfo *tsi) {
+    if( ((fontName->cmp(tsi->getFontName())  == 0 )
+            &&  (fontSize == tsi->getFontSize())
+            && (fontColor->cmp(tsi->getFontColor())  == 0 )
+            //&& (fontType == tsi->getFontType())
+            //&& (fontStyle == tsi->getFontStyle())
+    )
+            )
+        return gTrue;
+    else return gFalse;
+}
+
 void TextPage::dump(GBool blocks, GBool fullFontName) {
     UnicodeMap *uMap;
 
     TextWord *word;
+    TextFontStyleInfo *fontStyleInfo;
     GString *stringTemp;
 
     GString *id;
@@ -1761,6 +1780,9 @@ void TextPage::dump(GBool blocks, GBool fullFontName) {
     minLineY = 999999999;
 
     for (word = rawWords; word; word = word->next) {
+
+        fontStyleInfo = new TextFontStyleInfo;
+
         lineFinish = gFalse;
         if (firstword) { // test useful?
             xMin = word->xMin;
@@ -1846,13 +1868,14 @@ void TextPage::dump(GBool blocks, GBool fullFontName) {
             dumpFragment(uncdFontName, size, uMap, gsFontName);
             xmlNewProp(node, (const xmlChar*)ATTR_FONT_NAME,
                        (const xmlChar*)gsFontName->getCString());
+            fontStyleInfo->setFontName(gsFontName);
             //delete gsFontName;
 
 
         }
 
         addAttributsNode(node, word, xMax, yMax, yMinRot, yMaxRot, xMinRot,
-                         xMaxRot);
+                         xMaxRot, fontStyleInfo);
         addAttributTypeReadingOrder(node, tmp, word);
 
         /// annotations: higlighted, underline,

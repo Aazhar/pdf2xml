@@ -111,29 +111,40 @@ private:
 class TextFontStyleInfo {
 public:
 
-    TextFontStyleInfo(GString *fontName, double fontSize, GString *fontColor, GString *fontType, GString *fontStyle, GString *fontWidth);
     ~TextFontStyleInfo();
 
     // Get the font name (which may be NULL).
-    GString* getFontName() const { return fontName; }
-    double getFontSize() const { return fontSize; }
-    GString* getFontColor() const { return fontColor; }
-    GString* getFontType() const { return fontType; }
-    GString* getFontStyle() const { return fontStyle; }
-    GString* getFontWidth() const { return fontWidth; }
+    int getId() const { return id; }
+    void setId(int fontId){id = fontId;}
 
-    // Compare two strings:  -1:<  0:=  +1:>
-    int cmp(TextFontStyleInfo *tsi);
+    GString* getFontName() const { return fontName; }
+    GString* getFontNameCS() { return fontName; }
+    void setFontName(GString* fontname){fontName = fontname;}
+
+    double getFontSize() const { return fontSize; }
+    void setFontSize(double fontsize){fontSize = fontsize;}
+
+    GString* getFontColor() const { return fontColor; }
+    void setFontColor(GString* fontcolor){fontColor = fontcolor;}
+
+    GBool getFontType() const { return fontType; }
+    void setFontType(GBool fonttype){fontType = fonttype;}
+
+    GBool getFontStyle() const { return fontStyle; }
+    void setFontStyle(GBool fontstyle){fontStyle = fontstyle;}
+
+    // Compare two text fonts:  -1:<  0:=  +1:>
+    GBool cmp(TextFontStyleInfo *tsi);
 //#endif
 
 private:
 
+    int id;
     GString* fontName;
     double fontSize;
     GString* fontColor;
-    GString* fontType;
-    GString* fontStyle;
-    GString* fontWidth;
+    GBool fontType; //Enumeration : serif (gTrue) or sans-serif(gFalse)
+    GBool fontStyle; //Enumeration : proportional(gFalse) or fixed(gTrue)
 //#endif
 
     friend class TextFontInfo;
@@ -589,7 +600,7 @@ public:
      * @param yMaxRot The y value maximum coordinate of the left bottom corner word box (used for rotation 1 and 3)
      * @param xMinRot The x value minimum coordinate of the left bottom corner word box (used for rotation 1 and 3)
      * @param xMaxRot The x value maximum coordinate of the left bottom corner word box (used for rotation 1 and 3) */
-    void addAttributsNode(xmlNodePtr node, TextWord *word, double &xMaxi, double &yMaxi, double &yMinRot,double &yMaxRot, double &xMinRot, double &xMaxRot);
+    void addAttributsNode(xmlNodePtr node, TextWord *word, double &xMaxi, double &yMaxi, double &yMinRot,double &yMaxRot, double &xMinRot, double &xMaxRot, TextFontStyleInfo *fontStyleInfo);
 
     /** Add the type attribute to TOKEN node for the reading order
      * @param node The current TOKEN node
@@ -691,6 +702,9 @@ public:
     int getIdx(){return idx;};
 
     vector<ImageInline*> listeImageInline;
+
+    /** The list of all recognized font styles*/
+    vector<TextFontStyleInfo*> fontStyles;
 
     // clamp to uint8
     static inline int clamp (int x)
@@ -1167,8 +1181,7 @@ private:
     /** The item id for each toc items */
     int idItemToc;
 
-    /** The list of all recognized font styles*/
-    vector<TextFontStyleInfo*> fontStyles;
+
 
 
 };
