@@ -71,6 +71,9 @@ namespace ConstantsXMLALTO
 
 	const char *TAG_TOKEN = "String";
     const char *ATTR_TOKEN_CONTENT = "CONTENT";
+
+    const char *TAG_SPACING = "SP";
+
 	const char *TAG_VECTORIALINSTRUCTIONS = "VECTORIALINSTRUCTIONS";
 	const char *TAG_GROUP = "GROUP";
 	const char *TAG_CLIP = "CLIP";

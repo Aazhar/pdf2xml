@@ -69,6 +69,8 @@ namespace ConstantsXMLALTO
 	extern const char *TAG_TOKEN;
     extern const char *ATTR_TOKEN_CONTENT;
 
+    extern const char *TAG_SPACING;
+
 	extern const char *TAG_VECTORIALINSTRUCTIONS;
 	extern const char *TAG_GROUP;
 	extern const char *TAG_CLIP;

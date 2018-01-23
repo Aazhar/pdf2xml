@@ -2426,6 +2426,26 @@ void TextPage::dump(GBool blocks, GBool fullFontName) {
             nodeline = xmlNewNode(NULL, (const xmlChar*)TAG_TEXT);
             nodeline->type = XML_ELEMENT_NODE;
         }
+
+        if(xmlChildElementCount(nodeline) > 0 && word->next)
+        {
+
+            xmlNodePtr spacingNode = xmlNewNode(NULL, (const xmlChar*)TAG_SPACING);
+            spacingNode->type = XML_ELEMENT_NODE;
+            sprintf(tmp, ATTR_NUMFORMAT, (word->next->xMin - word->xMax));
+            xmlNewProp(spacingNode, (const xmlChar*)ATTR_WIDTH,
+                       (const xmlChar*)tmp);
+            sprintf(tmp, ATTR_NUMFORMAT, (word->yMin));
+            xmlNewProp(spacingNode, (const xmlChar*)ATTR_Y,
+                       (const xmlChar*)tmp);
+            sprintf(tmp, ATTR_NUMFORMAT, (word->xMax));
+            xmlNewProp(spacingNode, (const xmlChar*)ATTR_X,
+                       (const xmlChar*)tmp);
+            
+            xmlAddChild(nodeline, spacingNode);
+
+        }
+
     } // end FOR
 
     free(tmp);
